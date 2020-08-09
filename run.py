@@ -17,6 +17,22 @@ colors = {
     "teal": (128, 255, 255),
     "yellow": (255, 255, 0)
     }
+pallates = [
+    ColorPallate(400, 600, colors["black"]),
+    ColorPallate(450, 600, colors["red"]),
+    ColorPallate(500, 600, colors["blue"]),
+    ColorPallate(550, 600, colors["green"]),
+    ColorPallate(400, 650, colors["pink"]),
+    ColorPallate(450, 650, colors["purple"]),
+    ColorPallate(500, 650, colors["teal"]),
+    ColorPallate(550, 650, colors["yellow"])
+]
+
+#initalize fonts/UI text
+UIfont = pygame.font.SysFont("arial", 30)
+SizeText = UIfont.render("Brush Size:", False, (0, 0, 0))
+ColorText = UIfont.render("Colors:", False, (0, 0, 0))
+SaveText = UIfont.render("Save/load:", False, (0, 0, 0))
 
 #initalize screen
 size = (1000, 700)
@@ -70,6 +86,13 @@ while run:
     
     #draw UI elements
     border.Draw(screen)
+    for pallate in pallates:
+        pallate.Draw(screen)
+    
+    #draw text
+    screen.blit(SizeText, (100, 560))
+    screen.blit(ColorText, (450, 560))
+    screen.blit(SaveText, (750, 560))
 
     #draw cell grid
     for row in grid:

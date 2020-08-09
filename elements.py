@@ -20,8 +20,10 @@ class Cell():
                 return True
 
 class ColorPallate():
-    def __init__(self, posx, posy):
+    def __init__(self, posx, posy, color):
         self.image = pygame.Surface((50, 50))
+        self.image.fill(color)
+        self.color = color
         self.rect = self.image.get_rect()
         self.rect.x = posx
         self.rect.y = posy
