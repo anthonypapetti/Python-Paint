@@ -49,6 +49,24 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        #left click actions
+        if pygame.mouse.get_pressed()[0]:
+            #click on canvas
+            if mouse[1] < 550:
+                for row in grid:
+                    for cell in row:
+                        if cell.Click(mouse):
+                            cell.image.fill((0,0,0))
+            #click on UI elements
+            else:
+                print("below border")
+        #right click actions
+        if pygame.mouse.get_pressed()[2]:
+            if mouse[1] < 550:
+                for row in grid:
+                    for cell in row:
+                        if cell.Click(mouse):
+                            cell.image.fill((255,255,255))
     
     #draw UI elements
     border.Draw(screen)
