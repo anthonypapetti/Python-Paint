@@ -4,6 +4,7 @@ import sys
 from elements import *
 
 pygame.init()
+pygame.display.set_caption("Python-Paint")
 
 #colors
 colors = {
