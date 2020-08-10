@@ -86,24 +86,5 @@ def Draw_Circle(position: list, radius: int) -> list:
             output.append([refpos[0] - i, refpos[1] - j])
     return output
 
-    # l = radius
-    # while True:
-    #     for i in range(l):
-    #         output.append([refpos[0] + i, refpos[1]])
-    #     for i in range(k):
-    #         output.append([refpos[0] + l, refpos[1] - i])
-    #     for i in range(k):
-    #         output.append([refpos[0] + l - i, refpos[1] - k])
-    #     for i in range(k):
-    #         output.append([refpos[0] - l, refpos[1] - k + i])
-    #     for i in range(l):
-    #         output.append([refpos[0] - l + i, refpos[1]])
-    #     refpos[1] -= 1
-    #     if refpos == position:
-    #         output.append(refpos)
-    #         return output
-    #     k = int(k / 2)
-    #     l = int(l / 2)
-
 def resize(brush, size):
     brush.size = size

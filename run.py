@@ -38,7 +38,6 @@ SaveText = UIfont.render("Save/load:", False, (0, 0, 0))
 #initalize screen
 size = (1000, 700)
 cellsize = (int(size[0]/5), int(550/5))
-print(cellsize)
 screen = pygame.display.set_mode(size)
 screen.fill(colors["white"])
 
