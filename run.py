@@ -44,6 +44,9 @@ screen.fill(colors["white"])
 
 #init UI elements
 border = Border(0, 550)
+size1button = Button("1", UIfont, 120, 620, resize)
+size2button = Button("2", UIfont, 160, 620, resize)
+size3button = Button("3", UIfont, 200, 620, resize)
 
 #init cell grid & Brush
 brush = Brush()
@@ -85,7 +88,12 @@ while run:
                                     pass        
             #click on UI elements
             else:
-                print(pygame.mouse.get_rel())
+                if size1button.Click(brush.position):
+                    size1button.onclick(brush, 1)
+                if size2button.Click(brush.position):
+                    size2button.onclick(brush, 2)
+                if size3button.Click(brush.position):
+                    size3button.onclick(brush, 4)
         #right click actions
         if pygame.mouse.get_pressed()[2]:
             if brush.position[1] < 550:
@@ -106,6 +114,9 @@ while run:
     border.Draw(screen)
     for pallate in pallates:
         pallate.Draw(screen)
+    size1button.Draw(screen)
+    size2button.Draw(screen)
+    size3button.Draw(screen)
     
     #draw text
     screen.blit(SizeText, (100, 560))
