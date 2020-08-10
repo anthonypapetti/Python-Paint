@@ -45,7 +45,8 @@ screen.fill(colors["white"])
 #init UI elements
 border = Border(0, 550)
 
-#init cell grid
+#init cell grid & Brush
+brush = Brush()
 grid = []
 
 xptr = 0
@@ -62,28 +63,44 @@ for i in range(cellsize[1]):
 
 run = True
 while run:
-    mouse = pygame.mouse.get_pos()
+    brush.position = pygame.mouse.get_pos()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
         #left click actions
         if pygame.mouse.get_pressed()[0]:
             #click on canvas
-            if mouse[1] < 550:
-                for row in grid:
-                    for cell in row:
-                        if cell.Click(mouse):
-                            cell.image.fill((0,0,0))
+            if brush.position[1] < 550:
+                #selecting target cell
+                for i in range(len(grid)):
+                    for j in range(len(grid[i])):
+                        if grid[i][j].Click(brush.position):
+                            #painting
+                            circle = Draw_Circle([i, j], brush.size)
+                            for position in circle:
+                                try:
+                                    grid[position[0]][position[1]].image.fill(brush.color)
+                                    grid[position[0]][position[1]].color = brush.color
+                                except:
+                                    pass        
             #click on UI elements
             else:
-                print("below border")
+                print(pygame.mouse.get_rel())
         #right click actions
         if pygame.mouse.get_pressed()[2]:
-            if mouse[1] < 550:
-                for row in grid:
-                    for cell in row:
-                        if cell.Click(mouse):
-                            cell.image.fill((255,255,255))
+            if brush.position[1] < 550:
+                #selecting target cell
+                for i in range(len(grid)):
+                    for j in range(len(grid[i])):
+                        if grid[i][j].Click(brush.position):
+                            #painting
+                            circle = Draw_Circle([i, j], brush.size)
+                            for position in circle:
+                                try:
+                                    grid[position[0]][position[1]].image.fill((255,255,255))
+                                    grid[position[0]][position[1]].color = (255,255,255)
+                                except:
+                                    pass
     
     #draw UI elements
     border.Draw(screen)
