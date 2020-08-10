@@ -22,7 +22,7 @@ class Cell():
 class Brush():
     def __init__(self):
         self.color = (0, 0, 0)
-        self.size = 2
+        self.size = 1
         self.position = None
 
 class ColorPallate():
