@@ -43,9 +43,10 @@ screen.fill(colors["white"])
 
 #init UI elements
 border = Border(0, 550)
-size1button = Button("1", UIfont, 120, 620, resize)
-size2button = Button("2", UIfont, 160, 620, resize)
-size3button = Button("3", UIfont, 200, 620, resize)
+size1button = Button("1", UIfont, 120, 600, resize)
+size2button = Button("2", UIfont, 160, 600, resize)
+size3button = Button("3", UIfont, 200, 600, resize)
+clearbutton = Button("Clear", UIfont, 140, 650, clear_grid)
 
 #init cell grid & Brush
 brush = Brush()
@@ -69,6 +70,7 @@ for pallate in pallates:
 size1button.Draw(screen)
 size2button.Draw(screen)
 size3button.Draw(screen)
+clearbutton.Draw(screen)
 
 #draw text
 screen.blit(SizeText, (100, 560))
@@ -114,6 +116,8 @@ while run:
                     size2button.onclick(brush, 2)
                 if size3button.Click(brush.position):
                     size3button.onclick(brush, 4)
+                if clearbutton.Click(brush.position):
+                    clearbutton.onclick(grid)
                 #color pallate buttons
                 for pallate in pallates:
                     if pallate.Click(brush.position):

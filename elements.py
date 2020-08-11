@@ -90,3 +90,9 @@ def Draw_Circle(position: list, radius: int) -> list:
 
 def resize(brush, size):
     brush.size = size
+
+def clear_grid(grid):
+    for row in grid:
+        for cell in row:
+            cell.image.fill((255, 255, 255))
+            cell.color = (255, 255, 255)
