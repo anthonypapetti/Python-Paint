@@ -63,26 +63,26 @@ for i in range(cellsize[1]):
     grid.append(row)
 
 #draw UI elements
-    border.Draw(screen)
-    for pallate in pallates:
-        pallate.Draw(screen)
-    size1button.Draw(screen)
-    size2button.Draw(screen)
-    size3button.Draw(screen)
-    
-    #draw text
-    screen.blit(SizeText, (100, 560))
-    screen.blit(ColorText, (450, 560))
-    screen.blit(SaveText, (750, 560))
+border.Draw(screen)
+for pallate in pallates:
+    pallate.Draw(screen)
+size1button.Draw(screen)
+size2button.Draw(screen)
+size3button.Draw(screen)
 
-    #draw cell grid
-    for row in grid:
-        for cell in row:
-            cell.Draw(screen)
+#draw text
+screen.blit(SizeText, (100, 560))
+screen.blit(ColorText, (450, 560))
+screen.blit(SaveText, (750, 560))
+
+#draw cell grid
+for row in grid:
+    for cell in row:
+        cell.Draw(screen)
 
 pygame.display.update()
 
-update_rect = None
+update_rect = Rect((0, 0), (1000, 550))
 run = True
 while run:
     brush.position = pygame.mouse.get_pos()
@@ -140,7 +140,7 @@ while run:
             cell.Draw(screen)
     
     #update display
-    pygame.display.update()
+    pygame.display.update(update_rect)
 
 pygame.quit()
 sys.exit()
