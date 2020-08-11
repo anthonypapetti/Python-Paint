@@ -62,7 +62,27 @@ for i in range(cellsize[1]):
     xptr = 0
     grid.append(row)
 
+#draw UI elements
+    border.Draw(screen)
+    for pallate in pallates:
+        pallate.Draw(screen)
+    size1button.Draw(screen)
+    size2button.Draw(screen)
+    size3button.Draw(screen)
+    
+    #draw text
+    screen.blit(SizeText, (100, 560))
+    screen.blit(ColorText, (450, 560))
+    screen.blit(SaveText, (750, 560))
 
+    #draw cell grid
+    for row in grid:
+        for cell in row:
+            cell.Draw(screen)
+
+pygame.display.update()
+
+update_rect = None
 run = True
 while run:
     brush.position = pygame.mouse.get_pos()
@@ -87,13 +107,18 @@ while run:
                                     pass        
             #click on UI elements
             else:
+                #brush size buttons
                 if size1button.Click(brush.position):
                     size1button.onclick(brush, 1)
                 if size2button.Click(brush.position):
                     size2button.onclick(brush, 2)
                 if size3button.Click(brush.position):
                     size3button.onclick(brush, 4)
-        #right click actions
+                #color pallate buttons
+                for pallate in pallates:
+                    if pallate.Click(brush.position):
+                        pallate.OnClick(brush)
+        #eraser control
         if pygame.mouse.get_pressed()[2]:
             if brush.position[1] < 550:
                 #selecting target cell
@@ -108,19 +133,6 @@ while run:
                                     grid[position[0]][position[1]].color = (255,255,255)
                                 except:
                                     pass
-    
-    #draw UI elements
-    border.Draw(screen)
-    for pallate in pallates:
-        pallate.Draw(screen)
-    size1button.Draw(screen)
-    size2button.Draw(screen)
-    size3button.Draw(screen)
-    
-    #draw text
-    screen.blit(SizeText, (100, 560))
-    screen.blit(ColorText, (450, 560))
-    screen.blit(SaveText, (750, 560))
 
     #draw cell grid
     for row in grid:

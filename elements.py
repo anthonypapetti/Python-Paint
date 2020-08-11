@@ -43,6 +43,9 @@ class ColorPallate():
         if mouse[0] > self.rect.topleft[0] and mouse[0] < self.rect.topright[0]:
             if mouse[1] > self.rect.topleft[1] and mouse[1] < self.rect.bottomleft[1]:
                 return True
+    
+    def OnClick(self, brush):
+        brush.color = self.color
 
 class Border():
     def __init__(self, posx, posy):
@@ -76,14 +79,13 @@ class Button():
 
 #takes a postion and raidus and returns a list of points
 #within that square
-# ONLY USE RADIUS VALUES DIVISIBLE BY 2
 def Draw_Circle(position: list, radius: int) -> list:
     k = radius * 2
-    refpos = [position[0] + int(k / 2), position[1] + int(k / 2)]
+    refpos = [position[0] - int(k / 2), position[1] - int(k / 2)]
     output = []
     for i in range(k + 1):
         for j in range(k + 1):
-            output.append([refpos[0] - i, refpos[1] - j])
+            output.append([refpos[0] + i, refpos[1] + j])
     return output
 
 def resize(brush, size):
