@@ -1,4 +1,8 @@
 import pygame
+import pickle
+import tkinter
+from tkinter import filedialog
+from tkinter import *
 
 class Cell():
     def __init__(self, posx, posy):
@@ -96,3 +100,42 @@ def clear_grid(grid):
         for cell in row:
             cell.image.fill((255, 255, 255))
             cell.color = (255, 255, 255)
+
+def check_grid(grid):
+    if not len(grid) == 110:
+        return None
+    for row in grid:
+        if not len(row) == 200:
+            return None
+    for row in grid:
+        for cell in row:
+            if not isinstance(cell, Cell):
+                return None
+    return True
+
+def save_grid(grid, root):
+    root.withdraw()
+    filename = filedialog.asksaveasfilename(initialdir="/", title="Save File", filetypes=[("Pickle File", ".pickle")], defaultextension=[("Pickle File", ".pickle")])
+    colorgrid = []
+    for i in range(len(grid)):
+        row = []
+        for j in range(len(grid[i])):
+            row.append(grid[i][j].color)
+        colorgrid.append(row)
+    try:
+        save_file = open(filename, "wb")
+    except:
+        return None
+    
+    pickle.dump(colorgrid, save_file)
+    save_file.close()
+
+def load_grid(grid, root):
+    root.withdraw()
+    filename = filedialog.askopenfilename(initialdir="/", title="Save File", filetypes=[("Pickle File", ".pickle")])
+    infile = open(filename, "rb")
+    new_grid = pickle.load(infile)
+    # if not check_grid(new_grid):
+    #     print("REEEEE")
+    #     return None
+    return new_grid

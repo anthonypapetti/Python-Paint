@@ -2,9 +2,13 @@ import pygame
 from pygame.locals import *
 import sys
 from elements import *
+import tkinter
+from tkinter import Tk
 
+#init modules
 pygame.init()
 pygame.display.set_caption("Python-Paint")
+tkroot = Tk()
 
 #colors
 colors = {
@@ -29,17 +33,17 @@ pallates = [
     ColorPallate(550, 650, colors["yellow"])
 ]
 
-#initalize fonts/UI text
-UIfont = pygame.font.SysFont("arial", 30)
-SizeText = UIfont.render("Brush Size:", False, (0, 0, 0))
-ColorText = UIfont.render("Colors:", False, (0, 0, 0))
-SaveText = UIfont.render("Save/load:", False, (0, 0, 0))
-
 #initalize screen
 size = (1000, 700)
 cellsize = (int(size[0]/5), int(550/5))
 screen = pygame.display.set_mode(size)
 screen.fill(colors["white"])
+
+#initalize fonts/UI text
+UIfont = pygame.font.SysFont("arial", 30)
+SizeText = UIfont.render("Brush Size:", False, (0, 0, 0))
+ColorText = UIfont.render("Colors:", False, (0, 0, 0))
+SaveText = UIfont.render("Save/load:", False, (0, 0, 0))
 
 #init UI elements
 border = Border(0, 550)
@@ -47,6 +51,8 @@ size1button = Button("1", UIfont, 120, 600, resize)
 size2button = Button("2", UIfont, 160, 600, resize)
 size3button = Button("3", UIfont, 200, 600, resize)
 clearbutton = Button("Clear", UIfont, 140, 650, clear_grid)
+savebutton = Button("Save", UIfont, 735, 615, save_grid)
+loadbutton = Button("Load", UIfont, 835, 615, load_grid)
 
 #init cell grid & Brush
 brush = Brush()
@@ -71,6 +77,8 @@ size1button.Draw(screen)
 size2button.Draw(screen)
 size3button.Draw(screen)
 clearbutton.Draw(screen)
+savebutton.Draw(screen)
+loadbutton.Draw(screen)
 
 #draw text
 screen.blit(SizeText, (100, 560))
@@ -122,6 +130,17 @@ while run:
                 for pallate in pallates:
                     if pallate.Click(brush.position):
                         pallate.OnClick(brush)
+                #save/load buttons
+                if savebutton.Click(brush.position):
+                    savebutton.onclick(grid, tkroot)
+                if loadbutton.Click(brush.position):
+                    colorgrid = loadbutton.onclick(grid, tkroot)
+                    if colorgrid:
+                        for i in range(len(grid)):
+                            for j in range(len(grid[i])):
+                                grid[i][j].image.fill(colorgrid[i][j])
+                                grid[i][j].color = colorgrid[i][j]
+                        
         #eraser control
         if pygame.mouse.get_pressed()[2]:
             if brush.position[1] < 550:
