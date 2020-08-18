@@ -102,21 +102,24 @@ def clear_grid(grid):
             cell.color = (255, 255, 255)
 
 def check_grid(grid):
-    if not len(grid) == 110:
-        return False
-    for row in grid:
-        if not len(row) == 200:
+    try:
+        if not len(grid) == 110:
             return False
-    for row in grid:
-        for cell in row:
-            if not isinstance(cell, tuple):
+        for row in grid:
+            if not len(row) == 200:
                 return False
-            if len(cell) != 3:
-                return False
-            for num in cell:
-                if not isinstance(num, int):
+        for row in grid:
+            for cell in row:
+                if not isinstance(cell, tuple):
                     return False
-    return True
+                if len(cell) != 3:
+                    return False
+                for num in cell:
+                    if not isinstance(num, int):
+                        return False
+        return True
+    except:
+        return False
 
 def save_grid(grid, root):
     root.withdraw()
@@ -141,6 +144,5 @@ def load_grid(grid, root):
     infile = open(filename, "rb")
     new_grid = pickle.load(infile)
     if not check_grid(new_grid):
-        print("REEEEE")
         return None
     return new_grid

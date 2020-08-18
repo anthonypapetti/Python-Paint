@@ -3,7 +3,7 @@ from pygame.locals import *
 import sys
 from elements import *
 import tkinter
-from tkinter import Tk
+from tkinter import Tk, messagebox
 
 #init modules
 pygame.init()
@@ -140,6 +140,9 @@ while run:
                             for j in range(len(grid[i])):
                                 grid[i][j].image.fill(colorgrid[i][j])
                                 grid[i][j].color = colorgrid[i][j]
+                    else:
+                        tkroot.withdraw()
+                        messagebox.showerror("Error", "Invalid Save File")
                         
         #eraser control
         if pygame.mouse.get_pressed()[2]:
